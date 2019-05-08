@@ -3,7 +3,6 @@ import flask
 from database.database import db, init_database
 import database.models
 from sar2019.config import Config
-from sar2019.forms import PostEditForm
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -21,21 +20,13 @@ def index():
 
 
 def save_post_and_redirect_to_homepage(post, form):
-    if post is None:
-        post = database.models.Post()
-        post.user_id = 1
-    post.title = form.title.data
-    post.content = form.content.data
-    db.session.add(post)
-    db.session.commit()
-
-    return flask.redirect(flask.url_for('index'))
+    # TODO: implement this function
+    pass
 
 
 def display_post_form(post, form):
-    return flask.render_template('edit_post_form.html.jinja2',
-                                 form=form,
-                                 post=post)
+    # TODO: implement this function
+    pass
 
 
 @app.route("/posts/edit/", methods=["GET", "POST"])
@@ -46,7 +37,9 @@ def create_or_process_post(post_id=None):
     # then post will be 'None', and the form will consider this value
     # as a sign that a new post should be created
     post = database.models.Post.query.filter_by(id=post_id).first()
-    form = PostEditForm(obj=post)
+
+    # TODO: Replace the following line!!
+    form = None
 
     if form.validate_on_submit():
         return save_post_and_redirect_to_homepage(post, form)
