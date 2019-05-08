@@ -20,6 +20,24 @@ def index():
                                  posts=posts)
 
 
+def save_post_and_redirect_to_homepage(post, form):
+    if post is None:
+        post = database.models.Post()
+        post.user_id = 1
+    post.title = form.title.data
+    post.content = form.content.data
+    db.session.add(post)
+    db.session.commit()
+
+    return flask.redirect(flask.url_for('index'))
+
+
+def display_post_form(post, form):
+    return flask.render_template('edit_post_form.html.jinja2',
+                                 form=form,
+                                 post=post)
+
+
 @app.route("/posts/edit/", methods=["GET", "POST"])
 @app.route("/posts/edit/<post_id>", methods=["GET", "POST"])
 def create_or_process_post(post_id=None):
@@ -31,16 +49,9 @@ def create_or_process_post(post_id=None):
     form = PostEditForm(obj=post)
 
     if form.validate_on_submit():
-        if post is None:
-            post = database.models.Post()
-            post.user_id = 1
-        post.title = form.title.data
-        post.content = form.content.data
-        db.session.add(post)
-        db.session.commit()
-
-        return flask.redirect(flask.url_for('index'))
-    return flask.render_template('edit_post_form.html.jinja2', form=form, post=post)
+        return save_post_and_redirect_to_homepage(post, form)
+    else:
+        return display_post_form(post, form)
 
 
 @app.route("/posts/delete/<post_id>")
