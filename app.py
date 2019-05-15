@@ -6,18 +6,43 @@ app = flask.Flask(__name__)
 app.config.from_object(Config)
 
 
-def traitement_formulaire_addition(form):
-    pass
+@app.route("/complex_view")
+@app.route("/")
+def complex_view():
+    colors = ["red", "blue", "green", "purple", "dark", "white"]
+    boolean_value = False
+    msg_if_boolean_value = "[boolean_value is true]"
+    msg_if_not_boolean_value = "[boolean_value is false]"
+
+    result = ""
+
+    for color in colors:
+        result += "* "
+        result += color
+        result += "\n"
+
+    if boolean_value:
+        result += msg_if_boolean_value
+    else:
+        result += msg_if_not_boolean_value
+
+    return flask.Response(result,
+                          mimetype="text")
 
 
-def afficher_formulaire_addition(form):
-    pass
+@app.route("/complex_view_template")
+def complex_view_template():
+    colors = ["red", "blue", "green", "purple", "dark", "white"]
+    boolean_value = False
+    msg_if_boolean_value = "[boolean_value is true]"
+    msg_if_not_boolean_value = "[boolean_value is false]"
 
-
-@app.route("/add", methods=["GET", "POST"])
-@app.route("/", methods=["GET", "POST"])
-def fonction_formulaire_addition():
-    return "TODO: implement me!"
+    return flask.Response(flask.render_template("complex_view.jinja2",
+                                 colors=colors,
+                                 boolean_value=boolean_value,
+                                 msg_if_boolean_value=msg_if_boolean_value,
+                                 msg_if_not_boolean_value=msg_if_not_boolean_value),
+                          mimetype="text")
 
 
 if __name__ == '__main__':
