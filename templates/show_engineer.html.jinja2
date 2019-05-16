@@ -1,15 +1,22 @@
-<p>Information about "{{ engineer.username }}"</p>
+<html>
+    <head>
+        <title>Description de {{ engineer.username }}</title>
+    </head>
+    <body>
+        <p>Information about "{{ engineer.username }}"</p>
 
-<dl>
-    <dt>id</dt>
-    <dd>{{ engineer.id }}</dd>
+        <dl>
+            <dt>id</dt>
+            <dd>{{ engineer.id }}</dd>
 
-    <dt>username</dt>
-    <dd>{{ engineer.username }}</dd>
+            <dt>username</dt>
+            <dd>{{ engineer.username }}</dd>
 
-    <dt>email</dt>
-    <dd>{{ engineer.email }}</dd>
+            <dt>email</dt>
+            <dd>{{ engineer.email }}</dd>
 
-    <dt>site</dt>
-    <dd>{{ engineer.site }}</dd>
-</dl>
+            <dt>site</dt>
+            <dd>{{ engineer.site }}</dd>
+        </dl>
+    </body>
+</html>

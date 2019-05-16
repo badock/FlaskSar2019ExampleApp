@@ -20,6 +20,10 @@ def get_engineer_by_id(engineer_id):
     return database.models.Engineer.query.filter_by(id=engineer_id).first()
 
 
+def get_engineers_in_site(site_name):
+    return database.models.Engineer.query.filter_by(site=site_name).all()
+
+
 @app.route('/')
 def index():
     engineers = get_all_engineers()
