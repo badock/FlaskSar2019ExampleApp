@@ -70,8 +70,8 @@ def show_engineer_without_templates(engineer_id):
     return result
 
 
-@app.route('/engineer/<int:engineer_id>')
-def show_engineer(engineer_id):
+@app.route('/engineer/id/<int:engineer_id>')
+def show_engineer_by_id(engineer_id):
     engineer = get_engineer_by_id(engineer_id)
     return flask.render_template("show_engineer.html.jinja2",
                                  engineer=engineer)
