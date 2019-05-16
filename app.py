@@ -38,10 +38,13 @@ def some_function_html_with_template():
                            msg_if_not_boolean_value_arg=msg_if_not_boolean_value)
 
 
-@app.route("/sum/<label>/<int:a>/<int:b>")
-def compute_sum(label, a, b):
+@app.route("/sum/<lang>/<int:a>/<int:b>")
+def compute_sum(lang, a, b):
     c = a + b
-    return label+" "+str(a)+" et "+str(b)+" est "+str(c)
+    if lang == "fr":
+        return "La somme de %d et %d est %d" % (a, b, c)
+    else:
+        return "The sum of %d and %d is %d" % (a, b, c)
 
 
 if __name__ == '__main__':
