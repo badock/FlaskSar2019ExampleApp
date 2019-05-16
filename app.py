@@ -38,7 +38,7 @@ def index():
 
 
 @app.route('/engineer/<int:engineer_id>')
-def show_engineer(engineer_id):
+def show_engineer_by_id(engineer_id):
     return "TODO: codez moi!"
 
 
