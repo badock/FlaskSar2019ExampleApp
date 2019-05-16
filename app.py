@@ -37,7 +37,7 @@ def index():
                           mimetype="text")
 
 
-@app.route('/engineer/<int:engineer_id>')
+@app.route('/engineer/id/<int:engineer_id>')
 def show_engineer_by_id(engineer_id):
     return "TODO: codez moi!"
 
