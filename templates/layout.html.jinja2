@@ -1,0 +1,24 @@
+{% macro set_active_if(variable, name) %}
+    {% if active_page == name %}class="active"{% endif %}
+{% endmacro %}
+
+<html>
+    <head>
+        <title>{{ title }}</title>
+        <link rel="stylesheet" href="{{ url_for("static", filename="css/style.css") }}">
+    </head>
+    <body>
+    <header>
+        <a href="{{ url_for("view_a") }}" {{ set_active_if(active_page, "view_a") }}>Template A</a> |
+        <a href="{{ url_for("view_b") }}" {{ set_active_if(active_page, "view_b") }}>Template B</a> |
+        <a href="{{ url_for("view_c") }}" {{ set_active_if(active_page, "view_c") }}>Template C</a>
+        <hr>
+    </header>
+    {% block body %}
+    {% endblock %}
+    <footer>
+        <hr>
+        Flask SAR - 2019
+    </footer>
+    </body>
+</html>
