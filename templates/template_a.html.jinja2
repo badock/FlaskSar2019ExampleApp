@@ -1,7 +1,23 @@
-{% extends "layout.html.jinja2" %}
-{% set title = "template A" %}
-{% set active_page = "view_a" %}
-
-{% block body %}
-    <p>Template a</p>
-{% endblock %}
+<html>
+    <head>
+        <title>{{ title }}</title>
+        <style>
+            .active {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+    <header>
+        <a href="/view/a" class="active">Template A</a> |
+        <a href="/view/b">Template B</a> |
+        <a href="/view/c">Template C</a>
+        <hr>
+    </header>
+    Template a
+    <footer>
+        <hr>
+        Flask SAR - 2019
+    </footer>
+    </body>
+</html>
