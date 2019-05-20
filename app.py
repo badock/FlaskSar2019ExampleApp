@@ -19,5 +19,10 @@ def view_c():
     return render_template("template_c.html.jinja2")
 
 
+@app.route('/static_resources_view')
+def static_resources_view():
+    return render_template("static_resources.html.jinja2")
+
+
 if __name__ == '__main__':
     app.run()

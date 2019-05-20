@@ -1,0 +1,11 @@
+<html>
+    <head>
+        <title>Static resources with Flask</title>
+        <link rel="stylesheet" href="{{ url_for("static", filename="css/static_resources_style.css") }}"/>
+    </head>
+    <body>
+        <img class="logo" src="{{ url_for("static", filename="img/logo.jpg") }}"/>
+        <span id="caption_logo"></span>
+    </body>
+    <script src="{{ url_for("static", filename="js/script.js") }}"></script>
+</html>

@@ -1,5 +1,5 @@
 {% macro set_active_if(variable, name) %}
-    {% if active_page == name %}class="active"{% endif %}
+    {% if variable == name %}class="active"{% endif %}
 {% endmacro %}
 
 <html>
