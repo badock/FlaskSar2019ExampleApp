@@ -27,27 +27,23 @@ def remove_object_from_db(db_object):
 
 
 def add_task_to_tasks_list(form, tasks_list):
-    new_task = Task(label=form.label.data,
-                    isDone=False,
-                    task_list_id=tasks_list.id)
-    save_object_to_db(new_task)
-
-    return new_task
+    # TODO: implement me
+    return None
 
 
 def create_tasks_list(tasks_list_name):
-    tasks_list = TaskList(name=tasks_list_name)
-    save_object_to_db(tasks_list)
-
-    return tasks_list
+    # TODO: implement me
+    return None
 
 
 def find_tasks_list_by_name(tasks_list_name):
-    return TaskList.query.filter_by(name=tasks_list_name).first()
+    # TODO: implement me
+    return None
 
 
 def find_task_by_id(task_id):
-    return Task.query.filter_by(id=task_id).first()
+    # TODO: implement me
+    return None
 
 
 @app.route("/<tasks_list_name>", methods=["GET", "POST"])
