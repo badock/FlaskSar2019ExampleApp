@@ -16,13 +16,38 @@ with app.test_request_context():
     init_database()
 
 
-def process_new_task(form, task_list):
-    print("Adding task '%s' to '%s'" % (form.label.data, task_list.name))
+def save_object_to_db(db_object):
+    db.session.add(db_object)
+    db.session.commit()
+
+
+def remove_object_from_db(db_object):
+    db.session.delete(db_object)
+    db.session.commit()
+
+
+def add_task_to_tasks_list(form, tasks_list):
     new_task = Task(label=form.label.data,
                     isDone=False,
-                    task_list_id=task_list.id)
-    db.session.add(new_task)
-    db.session.commit()
+                    task_list_id=tasks_list.id)
+    save_object_to_db(new_task)
+
+    return new_task
+
+
+def create_tasks_list(tasks_list_name):
+    tasks_list = TaskList(name=tasks_list_name)
+    save_object_to_db(tasks_list)
+
+    return tasks_list
+
+
+def find_tasks_list_by_name(tasks_list_name):
+    return TaskList.query.filter_by(name=tasks_list_name).first()
+
+
+def find_task_by_id(task_id):
+    return Task.query.filter_by(id=task_id).first()
 
 
 @app.route("/<tasks_list_name>", methods=["GET", "POST"])
@@ -30,15 +55,13 @@ def process_new_task(form, task_list):
 def homepage(tasks_list_name="default"):
     form = NewTaskForm()
 
-    tasks_list = TaskList.query.filter_by(name=tasks_list_name).first()
+    tasks_list = find_tasks_list_by_name(tasks_list_name)
 
     if tasks_list is None:
-        tasks_list = TaskList(name=tasks_list_name)
-        db.session.add(tasks_list)
-        db.session.commit()
+        tasks_list = create_tasks_list(tasks_list_name)
 
     if form.validate_on_submit():
-        process_new_task(form, tasks_list)
+        add_task_to_tasks_list(form, tasks_list)
         return flask.redirect(flask.url_for("homepage",
                                             tasks_list_name=tasks_list.name))
 
@@ -49,13 +72,12 @@ def homepage(tasks_list_name="default"):
 
 @app.route("/toggle_task/<int:task_id>")
 def toggle_task(task_id):
-    existing_task = Task.query.filter_by(id=task_id).first()
+    existing_task = find_task_by_id(task_id)
     tasks_list = existing_task.tasks_list
 
     existing_task.isDone = not existing_task.isDone
 
-    db.session.add(existing_task)
-    db.session.commit()
+    save_object_to_db(existing_task)
 
     return flask.redirect(flask.url_for("homepage",
                                         tasks_list_name=tasks_list.name))
@@ -63,12 +85,11 @@ def toggle_task(task_id):
 
 @app.route("/delete_task/<int:task_id>")
 def delete_task(task_id):
-    existing_task = Task.query.filter_by(id=task_id).first()
+    existing_task = find_task_by_id(task_id)
 
     tasks_list = existing_task.tasks_list
 
-    db.session.delete(existing_task)
-    db.session.commit()
+    remove_object_from_db(existing_task)
 
     return flask.redirect(flask.url_for("homepage",
                                         tasks_list_name=tasks_list.name))
