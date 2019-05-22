@@ -1,9 +1,9 @@
 {% from "forms.html.jinja2" import render_field %}
 
-TODO list:
+{{ tasks_list.name }} list:
 
 <ul>
-    {% for task in tasks %}
+    {% for task in tasks_list.tasks %}
         <li>
             <a href="{{ url_for("toggle_task", task_id=task.id) }}"><input type="checkbox" {{ "checked" if task.isDone }}></a>
             {{ task.label }}
@@ -12,7 +12,7 @@ TODO list:
     {% endfor %}
 </ul>
 
-<form action="{{ url_for("homepage") }}" method="post">
+<form action="{{ url_for("homepage", tasks_list_name=tasks_list.name) }}" method="post">
     {{ form.hidden_tag() }}
 
     {{ render_field(form.label) }}
