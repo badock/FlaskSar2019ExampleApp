@@ -4,4 +4,4 @@ from wtforms.validators import DataRequired, ValidationError
 
 
 class NewTaskForm(Form):
-    label = StringField('Label', validators=[DataRequired()])
+    label = StringField('Ajouter une tâche', validators=[DataRequired()])
