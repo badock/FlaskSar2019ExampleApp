@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 
 @app.route('/view/a')
+@app.route('/')
 def view_a():
     return render_template("template_a.html.jinja2")
 
