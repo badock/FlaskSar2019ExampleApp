@@ -64,7 +64,7 @@ def toggle_task(task_id):
 
     existing_task.isDone = not existing_task.isDone
 
-    #save_object_to_db(existing_task)
+    save_object_to_db(existing_task)
 
     return flask.redirect(flask.url_for("homepage",
                                         tasks_list_name=tasks_list.name))
@@ -76,7 +76,7 @@ def delete_task(task_id):
 
     tasks_list = existing_task.tasks_list
 
-    #remove_object_from_db(existing_task)
+    remove_object_from_db(existing_task)
 
     return flask.redirect(flask.url_for("homepage",
                                         tasks_list_name=tasks_list.name))
