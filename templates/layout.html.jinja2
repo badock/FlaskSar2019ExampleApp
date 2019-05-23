@@ -5,7 +5,12 @@
 <html>
     <head>
         <title>{{ title }}</title>
-        <link rel="stylesheet" href="{{ url_for("static", filename="css/style.css") }}">
+        <style>
+            .active {
+                font-weight: bold;
+                color: red;
+            }
+        </style>
     </head>
     <body>
     <header>
