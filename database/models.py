@@ -9,7 +9,7 @@ class Ingenieur(db.Model):
     nom_famille = db.Column(db.Text)
     site = db.Column(db.Text)
 
-    taux_horaire = db.Column(db.Float)
+    taux_journalier = db.Column(db.Float)
 
     certifications = db.relationship('Certification', backref='ingenieur', lazy='dynamic')
     souhaits = db.relationship('Souhait', backref='ingenieur', lazy='dynamic')
@@ -34,7 +34,7 @@ class Certification(db.Model):
 
 class Besoin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    quantite = db.Column(db.Integer)
+    quantite_jour_homme = db.Column(db.Integer)
 
     mission_id = db.Column(db.Integer, db.ForeignKey('mission.id'))
     competence_id = db.Column(db.Integer, db.ForeignKey('competence.id'))

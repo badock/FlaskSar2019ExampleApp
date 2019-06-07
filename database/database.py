@@ -34,7 +34,7 @@ def populate_database():
         nom_famille = random.choice(NOM_DE_FAMILLES)
         nom_court = prenom.lower()[0] + nom_famille.lower()
         site = random.choice(BUREAUX)
-        taux_horaire = round(random.uniform(30, 70), 2)
+        taux_journalier = round(random.uniform(240, 560), 2)
         email = "%s.%s@%s_agency.bigcompany.fr" % (prenom.lower(),
                                                    nom_famille.lower(),
                                                    site.lower())
@@ -43,7 +43,7 @@ def populate_database():
                                                  nom_famille=nom_famille,
                                                  site=site,
                                                  email=email,
-                                                 taux_horaire=taux_horaire)
+                                                 taux_journalier=taux_journalier)
 
         db.session.add(new_engineer)
         try:
@@ -110,9 +110,9 @@ def populate_database():
         competences_choisies = random.sample(competences, 2)
 
         for competence in competences_choisies:
-            besoin_en_ingenieurs = random.randint(1, 3)
+            besoin_en_ingenieurs = random.randint(15, 50)
 
-            nouveau_besoin = database.models.Besoin(quantite=besoin_en_ingenieurs,
+            nouveau_besoin = database.models.Besoin(quantite_jour_homme=besoin_en_ingenieurs,
                                                     mission_id=mission.id,
                                                     competence_id=competence.id)
             db.session.add(nouveau_besoin)
@@ -168,7 +168,7 @@ def populate_database():
                 .filter_by(id=besoin.competence.id) \
                 .all()
 
-            ingenieurs_affectes = random.sample(ingenieurs_avec_cette_competence, besoin.quantite)
+            ingenieurs_affectes = random.sample(ingenieurs_avec_cette_competence, 2)
 
             for ingenieur_affecte in ingenieurs_affectes:
 

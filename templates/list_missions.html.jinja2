@@ -3,7 +3,7 @@
     <li><h2>{{ mission.titre }}</h2>
         besoins:<ul>
         {% for besoin in mission.besoins %}
-            <li>{{ besoin.competence.nom }} => {{ besoin.quantite }}</li>
+            <li>{{ besoin.competence.nom }} => {{ besoin.quantite_jour_homme }} jours/homme</li>
         {% endfor %}
         </ul>
         <div>responsable: {{ mission.responsable.email }}</div>
