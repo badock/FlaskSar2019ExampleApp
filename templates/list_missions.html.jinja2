@@ -1,0 +1,38 @@
+<ul>
+{% for mission in missions %}
+    <li><h2>{{ mission.titre }}</h2>
+        besoins:<ul>
+        {% for besoin in mission.besoins %}
+            <li>{{ besoin.competence.nom }} => {{ besoin.quantite }}</li>
+        {% endfor %}
+        </ul>
+        <div>responsable: {{ mission.responsable.email }}</div>
+        <div>description: {{ mission.description }}</div>
+        affectations:<ul>
+        {% for affectation in mission.affectations %}
+            <li>{{ affectation.ingenieur.email }}
+                certifications:
+                {% for certification in affectation.ingenieur.certifications %}
+                    {{ certification.competence.nom }}
+                {% endfor %}
+                <ul>
+                    <li>date debut: {{ affectation.date_debut }}</li>
+                    <li>date fin: {{ affectation.date_fin }}</li>
+                </ul>
+            </li>
+        {% endfor %}
+        </ul>
+         souhaits:<ul>
+        {% for souhait in mission.souhaits %}
+            <li>{{ souhait.ingenieur.email }}
+                certifications:
+                {% for certification in souhait.ingenieur.certifications %}
+                    {{ certification.competence.nom }}
+                {% endfor %}
+            </li>
+        {% endfor %}
+        </ul>
+    prix de vente: {{ mission.prix_vente }}€
+    </li>
+{% endfor %}
+</ul>
