@@ -1,0 +1,12 @@
+<ul>
+{% for engineer in engineers %}
+    <li>{{ engineer.prenom }} {{ engineer.nom_famille }} ({{ engineer.nom_court }})
+        competences:<ul>
+        {% for certification in engineer.certifications %}
+            <li>{{ certification.competence.nom }}</li>
+        {% endfor %}
+        taux horaire: {{ engineer.taux_horaire }} € / heure
+        </ul>
+    </li>
+{% endfor %}
+</ul>
